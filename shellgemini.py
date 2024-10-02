@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 import requests
 import sys
-import configparser
 import os
 
-config = configparser.ConfigParser()
-config_path = os.path.join(os.getenv('USERPROFILE'), 'shellgemini.conf')
-config.read(config_path)
-GEMINI_API_KEY = config['DEFAULT']['api_key']
+GEMINI_API_KEY = os.getenv('API_KEY')
 
 def chat_gemini(text: str):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={GEMINI_API_KEY}"
