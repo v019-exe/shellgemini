@@ -5,7 +5,6 @@ import configparser
 
 config = configparser.ConfigParser()
 config.read("/usr/local/bin/shellgemini.conf")
-
 GEMINI_API_KEY = config['DEFAULT']['api_key']
 
 def chat_gemini(text: str):
@@ -13,13 +12,24 @@ def chat_gemini(text: str):
     headers = {
         "Content-Type": "application/json"
     }
-    data = {"contents": [{"parts": [{"text": f"{text}"}]}]}
+    data = {"contents": [{"parts": [{"text": f"Ciberseguridad: {text}"}]}]}
     response = requests.post(url, headers=headers, json=data)
     if response.status_code == 400:
         print("Clave API no valida")
     else:
         response_json = response.json()
         return response_json["candidates"][0]["content"]["parts"][0]["text"]
+
+
+def formatear_respuesta(respuesta: str):
+    respuesta = respuesta.replace("#", "")
+    respuesta = respuesta.replace("*", "")
+    respuesta = respuesta.replace("_", "")
+    respuesta = respuesta.replace("`", "")
+    respuesta = respuesta.strip()
+    
+    return respuesta
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -29,4 +39,5 @@ if __name__ == "__main__":
     pregunta = " ".join(sys.argv[1:])
     respuesta = chat_gemini(text=pregunta)
     
-    print(respuesta)
+    if respuesta:
+        print(formatear_respuesta(respuesta))
