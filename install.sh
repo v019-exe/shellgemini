@@ -51,7 +51,7 @@ echo -e "${YELLOW}Instalando el paquete necesario 'requests'...${RESET}"
 pip3 install requests --quiet
 
 echo -e "${YELLOW}Descargando el script ShellGemini...${RESET}"
-curl -s -o shellgemini.py "https://raw.githubusercontent.com/v019-exe/shellgemini/refs/heads/linux/shellgemini.py"
+curl -s -o shellgemini.py "https://raw.githubusercontent.com/v019-exe/shellgemini/refs/heads/macos/shellgemini.py"
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error al descargar 'shellgemini.py'. Asegúrate de que la URL sea correcta.${RESET}"
